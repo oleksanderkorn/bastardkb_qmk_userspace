@@ -17,6 +17,64 @@
 
 #include QMK_KEYBOARD_H
 
+enum custom_keycodes {
+  QWERTY = SAFE_RANGE,
+  LOWER,
+  RAISE,
+  FUNC,
+  BACKLIT
+};
+
+enum combos {
+  JK_ESC
+};
+
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+
+combo_t key_combos[] = {
+  // For Vim, put Escape on the home row
+  [JK_ESC]    = COMBO(jk_combo, KC_ESC),
+
+};
+
+// Each layer gets a name for readability, which is then used in the keymap matrix below.
+// The underscores don't mean anything - you can have a layer called STUFF or any other name.
+// Layer names don't all need to be of the same length, obviously, and you can also skip them
+// entirely and just use numbers.
+#define _QWERTY 0
+#define _LOWER 1
+#define _RAISE 2
+#define _FUNC 3
+
+// For _QWERTY layer
+#define OSM_LCTL OSM(MOD_LCTL)
+#define OSM_AGR  MT(MOD_LALT | MOD_RALT,KC_ESC) // Tap - Esc, Hold - Alt
+#define OSL_FUN  OSL(_FUNC)
+#define GUI_ENT  GUI_T(KC_ENT)
+#define LOW_TAB  LT(_LOWER, KC_TAB)
+#define RSE_DEL  LT(_RAISE, KC_DEL)
+#define OSM_SFT  OSM(MOD_LSFT)
+
+#define OS_SALL  LGUI(KC_A) // SELECT
+#define OS_COPY  LGUI(KC_C) // COPY
+#define OS_PSTE  LGUI(KC_V) // PASTE
+#define OS_LANG  LCTL(KC_SPC) // Ctrl Space - change language
+#define OS_LANG  LCTL(KC_SPC) // Ctrl Space - change language
+
+
+#define RCT_RT   LCA(KC_RGHT) // rectange right side
+#define RCT_CT   LCA(KC_ENT) // rectange maximize windows
+#define RCT_LT   LCA(KC_LEFT) // rectange left side
+
+#define SCR_PT_C LGUI(LSFT(LCTL(KC_4))) // copy part of screen to clipboard
+#define SCR_C LGUI(LSFT(LCTL(KC_3))) // copy whole screen to clipboard
+#define SCR_PT_S LGUI(LSFT(KC_4)) // copy part of screen and save
+#define SCR_S LGUI(LSFT(KC_3)) // copy whole screen and save
+
+// For _RAISE layer
+#define CTL_ESC  LCTL_T(KC_ESC)
+#define CMD_ENT  LGUI(KC_ENT)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [0] = LAYOUT_split_3x6_3(
