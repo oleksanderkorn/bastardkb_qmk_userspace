@@ -103,13 +103,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FUNC] = LAYOUT_split_3x6_3( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, KC_F1  , KC_F2  , KC_F3   , KC_F4 ,  KC_F5 ,                     KC_F6   , KC_F7  , KC_F8  , KC_F9  , KC_F10 ,_______,\
+      _______, KC_F1  , KC_F2  , KC_F3   , KC_F4 ,  KC_F5 ,                     KC_F6   , KC_F7  , KC_F8  , KC_F9   , KC_F10 ,_______,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_F11 , KC_F12 , RGB_TOG, RGB_MOD, XXXXXXX,                     RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,_______,\
+      _______, KC_F11 , KC_F12 , RGB_TOG, RGB_MOD, XXXXXXX,                     MS_BTN1 , MS_UP   , MS_BTN2 , MS_WHLU , MS_WHLD,_______,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_CAPS, SCR_PT_C, SCR_S, SCR_PT_S, SCR_C,                       RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, QK_BOOT,XXXXXXX,\
+      _______, KC_CAPS, SCR_PT_C, SCR_S, SCR_PT_S, SCR_C,                       MS_LEFT , MS_DOWN , MS_RGHT , MS_WHLL , MS_WHLR,XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_ESC, XXXXXXX, XXXXXXX,    XXXXXXX, FUNC   , XXXXXXX\
                                       //`--------------------------'  `--------------------------'
   )
 };
+
+#ifdef TAPPING_TERM_PER_KEY
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case MT(MOD_LSFT,KC_F):
+        case MT(MOD_RSFT,KC_J):
+            return TAPPING_TERM;
+        default:
+            return TAPPING_TERM + 80;
+    }
+}
+#endif
