@@ -1,7 +1,4 @@
 {
     "userspace_version": "1.0",
-    "build_targets": [
-        ["bastardkb/tbkmini", "vendor"],
-        ["bastardkb/tbkmini", "corne"]
-    ]
+    "build_targets": [["bastardkb/tbkmini", "corne"]]
 }
